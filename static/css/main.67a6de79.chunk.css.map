@@ -1,0 +1,1 @@
+{"version":3,"sources":["/Users/macylia/Projects/goit-react-hw-02-phonebook/src/components/Button/Btn.module.css"],"names":[],"mappings":"AAAA,gBACI,YAAY,CACZ,eACJ","file":"main.67a6de79.chunk.css","sourcesContent":[".btn{\n    display:flex;\n    margin-top: 30px;\n}"]}
