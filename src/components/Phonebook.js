@@ -18,17 +18,35 @@ class Phonebook extends Component{
         })
     };
 
+    checkContactExist = (contactName) => {
+        const allContacts = this.props.contacts;
+        const include = allContacts.filter(item =>
+            item.contact.toLowerCase()
+                .includes(contactName.toLowerCase())
+        );
+
+        return (include.length !== 0);
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
         const contact = this.state.contact;
         const number = this.state.number;
         if (contact && number){
-            const newContact = { id: uuid(),contact,number}
-            this.props.getContactInfo(newContact);
-            this.setState({ contact: '', number: ''})
+
+            if (this.checkContactExist(contact)){
+                return alert ("Already exist :(");
+            }else {
+
+                const newContact = {id: uuid(), contact, number}
+                this.props.getContactInfo(newContact);
+                this.setState({contact: '', number: ''})
+            }
         }
     };
+
+
 
 render(){
 

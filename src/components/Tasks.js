@@ -15,11 +15,11 @@ class Tasks extends Component {
     }
 
     filterList = () => {
-        if (this.state.filter) {
-            return this.state.contacts.filter(item => {
-                item.contact.includes(this.state.filter)
-            });
-        }
+        if (this.state.filter)
+            return this.state.contacts.filter(item =>
+                item.contact.toLowerCase().includes(this.state.filter)
+            );
+
         return(this.state.contacts)
         // return this.state.contacts.filter(item => {
         //     item.contact.includes(this.state.filter)
@@ -35,16 +35,26 @@ class Tasks extends Component {
             contacts: [...prevstate.contacts, newContact]
         }))
     }
+    deleteItem = (e) => {
+        const id = e.target.id;
+        console.log(e.target)
+        this.setState(prevstate => ({
+            contacts: [...prevstate.contacts.filter(contact => contact.id !== id)]
+        }))
+    }
 
     render() {
         return (
             <>
-                <Phonebook getContactInfo={this.getContactInfo}/>
+                <Phonebook getContactInfo={this.getContactInfo}
+                    contacts={this.state.contacts}
+                />
                 <List
                     contacts={this.state.contacts}
                     filterList={this.filterList()}
                     filter={this.state.filter}
                     getFilterValue={this.getFilterValue}
+                    deleteItem ={this.deleteItem}
                 />
             </>
         );
